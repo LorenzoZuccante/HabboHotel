@@ -1,0 +1,72 @@
+﻿@model HabboHotel.Models.Prenotazione
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Assicurati che il percorso sia corretto
+    ViewBag.Title = "Inserisci Prenotazione";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center">@ViewBag.Title</h2>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.SuccessMessage
+        </div>
+    }
+
+    @using (Html.BeginForm("InserisciPrenotazione", "Prenotazioni", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataPrenotazione, new { @class = "control-label" })
+            @Html.EditorFor(model => model.DataPrenotazione, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+            @Html.ValidationMessageFor(model => model.DataPrenotazione, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoggiornoDa, new { @class = "control-label" })
+            @Html.EditorFor(model => model.SoggiornoDa, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+            @Html.ValidationMessageFor(model => model.SoggiornoDa, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoggiornoA, new { @class = "control-label" })
+            @Html.EditorFor(model => model.SoggiornoA, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+            @Html.ValidationMessageFor(model => model.SoggiornoA, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Pensione", new { @class = "control-label" })
+            @Html.DropDownList("IdPensione", (IEnumerable<SelectListItem>)ViewBag.IdPensione, "Seleziona...", new { @class = "form-control" })
+            @Html.ValidationMessage("IdPensione", "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Cliente", new { @class = "control-label" })
+            @Html.DropDownList("IdCliente", (IEnumerable<SelectListItem>)ViewBag.IdCliente, "Seleziona...", new { @class = "form-control" })
+            @Html.ValidationMessage("IdCliente", "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Camera", new { @class = "control-label" })
+            @Html.DropDownList("IdCamera", (IEnumerable<SelectListItem>)ViewBag.IdCamera, "Seleziona...", new { @class = "form-control" })
+            @Html.ValidationMessage("IdCamera", "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tariffa, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Tariffa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Tariffa, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mt-3">Inserisci</button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+   
+}

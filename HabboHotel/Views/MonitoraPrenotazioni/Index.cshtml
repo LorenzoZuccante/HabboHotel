@@ -1,0 +1,58 @@
+﻿@model List<HabboHotel.Models.Prenotazione>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Monitora Prenotazioni";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">@ViewBag.Title</h2>
+
+    <div class="mb-3">
+        <a href="@Url.Action("InserisciPrenotazione", "Prenotazioni")" class="btn btn-success">Aggiungi Nuova Prenotazione</a>
+    </div>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.SuccessMessage
+        </div>
+    }
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Data Prenotazione</th>
+                <th>Soggiorno Da</th>
+                <th>Soggiorno A</th>
+                <th>Tariffa</th>
+                <th>Cliente</th>
+                <th>Camera</th>
+                <th>Pensione</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DataPrenotazione.("dd/MM/yyyy")</td>
+                    <td>@item.SoggiornoDa.("dd/MM/yyyy")</td>
+                    <td>@item.SoggiornoA.("dd/MM/yyyy")</td>
+                    <td>@item.Tariffa.ToString("C")</td>
+                    <td>@item.Cliente.Cognome @item.Cliente.Nome</td>
+                    <td>@item.Camera.Descrizione</td>
+                    <td>@item.Pensione.TipoPensione</td>
+                    <td>
+                        
+                        <button class="btn btn-primary">Inserisci Servizi Accessori</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
